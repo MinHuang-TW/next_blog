@@ -12,6 +12,9 @@ export const getPosts = async () => {
             slug
             title
             excerpt
+            content {
+              text
+            }
             categories {
               name
               slug

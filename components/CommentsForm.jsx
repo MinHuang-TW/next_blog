@@ -46,7 +46,7 @@ const CommentsForm = ({ slug }) => {
       <div className='grid grid-cols-1 gap-4 mb-4'>
         <textarea
           ref={commentEl}
-          className='p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
+          className='p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300'
           name='comment'
           placeholder='Comment'
         />
@@ -57,14 +57,14 @@ const CommentsForm = ({ slug }) => {
           ref={nameEl}
           name='name'
           placeholder='Name'
-          className='px-4 py-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
+          className='px-4 py-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300'
         />
         <input
           type='email'
           ref={emailEl}
           name='email'
           placeholder='Email'
-          className='px-4 py-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
+          className='px-4 py-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300'
         />
       </div>
       <div className='grid grid-cols-1 gap-4 mb-4'>

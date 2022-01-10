@@ -1,24 +1,22 @@
 import Image from 'next/image';
 
-const Author = ({ author }) => {
-  return (
-    <div className='text-center mt-20 mb-8 p-12 relative rounded-lg bg-white bg-opacity-20'>
-      <div className='absolute left-0 right-0 -top-14'>
-        {author.photo && (
-          <Image
-            className='align-middle rounded-full'
-            src={author.photo.url}
-            width={100}
-            height={100}
-            alt={author.name}
-            unoptimized
-          />
-        )}
-      </div>
-      <h3 className='text-white my-4 text-xl font-bold'>{author.name}</h3>
-      <p className='text-white text-lg'>{author.bio}</p>
+const Author = ({ author }) => (
+  <div className='author-card p-8 mb-8 rounded-lg flex items-center flex-col lg:flex-row gap-6'>
+    {author.photo && (
+      <Image
+        className='align-middle rounded-full'
+        src={author.photo.url}
+        width={100}
+        height={100}
+        alt={author.name}
+        unoptimized
+      />
+    )}
+    <div className='text-white text-center lg:text-left'>
+      <h3 className='text-xl font-bold mb-2'>{author.name}</h3>
+      <p>{author.bio}</p>
     </div>
-  );
-};
+  </div>
+);
 
 export default Author;

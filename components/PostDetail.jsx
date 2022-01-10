@@ -1,4 +1,6 @@
-import React from 'react';
+import { Fragment } from 'react';
+import moment from 'moment';
+import Image from 'next/image';
 
 const PostDetail = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
@@ -26,13 +28,12 @@ const PostDetail = ({ post }) => {
     }
 
     switch (type) {
-      // TODO:
-      case 'block-quote':
+      case 'block-quote': // TODO:
       case 'heading-three':
         return (
           <h3 key={index} className='text-xl font-semibold mb-4'>
             {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
+              <Fragment key={i}>{item}</Fragment>
             ))}
           </h3>
         );
@@ -40,7 +41,7 @@ const PostDetail = ({ post }) => {
         return (
           <p key={index} className='mb-8'>
             {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
+              <Fragment key={i}>{item}</Fragment>
             ))}
           </p>
         );
@@ -48,37 +49,45 @@ const PostDetail = ({ post }) => {
         return (
           <h4 key={index} className='text-md font-semibold mb-4'>
             {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
+              <Fragment key={i}>{item}</Fragment>
             ))}
           </h4>
         );
       case 'image':
         return (
-          <img
+          <Image
             key={index}
             alt={obj.title}
             height={obj.height}
             width={obj.width}
             src={obj.src}
+            priority
           />
         );
       default:
         return modifiedText;
     }
   };
-
   return (
-    <div className='bg-white shadow-lg rounded-lg pb-12 mb-8'>
-      <div className='relative overflow-hidden mb-6'>
-        <img
-          className='object-top h-full w-full rounded-t-lg'
+    <div className='bg-white shadow-lg rounded-lg mb-8'>
+      <div className='relative w-full h-[40vh]'>
+        <Image
+          className='rounded-t-lg'
           src={post.featuredImage.url}
           alt={post.title}
+          layout='fill'
+          objectFit='cover'
+          objectPosition='center'
+          priority
         />
       </div>
-      <div className='px-4'>
-        <div className='flex items-center mb-8 w-full'></div>
-        {/* TODO: autor */}
+      <div className='px-4 py-6'>
+        <div className='flex items-center w-full'>
+          {/* TODO: autor */}
+          <small className='text-gray-500 block mb-2'>
+            {moment(post.createdAt).format('MMM DD, YYYY')}
+          </small>
+        </div>
         <h1 className='mb-8 text-2xl font-semibold'>{post.title}</h1>
         {post.content.raw.children.map((object, index) => {
           const children = object.children.map((item, itemIndex) =>

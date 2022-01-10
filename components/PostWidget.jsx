@@ -30,9 +30,9 @@ const PostWidget = ({ categories, slug }) => {
               style={{ backgroundImage: `url(${post.featuredImage.url})` }}
             />
             <div className='flex-grow ml-4'>
-              <p className='text-gray-500 font-xs'>
+              <small className='text-gray-500 block'>
                 {moment(post.createdAt).format('MMM DD, YYYY')}
-              </p>
+              </small>
               <Link className='text-md' href={`/post/${post.slug}`}>
                 {post.title}
               </Link>
@@ -40,7 +40,7 @@ const PostWidget = ({ categories, slug }) => {
           </div>
         ))
       ) : (
-        <p className='text-md'>No available post</p>
+        <p className='text-md'>{`No ${slug ? 'related' : 'recent'} post`}</p>
       )}
     </div>
   );
