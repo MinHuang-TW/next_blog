@@ -13,7 +13,6 @@ import {
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
-  const categories = post.categories.map(({ slug }) => slug);
   if (router.isFallback) return <Loader />;
   return (
     <div className='container mx-auto px-10 mb-8'>
@@ -26,7 +25,10 @@ const PostDetails = ({ post }) => {
         </div>
         <div className='col-span-1 lg:col-span-4'>
           <div className='relative lg:sticky top-8'>
-            <PostWidget slug={post.slug} categories={categories} />
+            <PostWidget
+              slug={post.slug}
+              categories={post?.categories?.map(({ slug }) => slug)}
+            />
             <Categories />
           </div>
         </div>
