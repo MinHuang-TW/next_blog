@@ -13,7 +13,7 @@ const Categories = () => {
       <h3 className='text-xl mb-8 font-semibold border-b pb-4'>Categories</h3>
       {categories.map(({ slug }) => (
         <Link key={slug} href={`/category/${slug}`}>
-          <span className='hover:text-teal-600 cursor-pointer block pb-3 mb-3'>
+          <span className='hover:text-teal-600 transition duration-200 cursor-pointer block pb-3 mb-3'>
             {slug}
           </span>
         </Link>
