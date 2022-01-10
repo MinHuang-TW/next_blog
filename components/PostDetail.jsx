@@ -13,8 +13,10 @@ const PostDetail = ({ post }) => {
             {obj.children.map((t) => {
               if (t.italic)
                 return (
-                  // TODO:
-                  <em key={index} className='underline'>
+                  <em
+                    key={index}
+                    className='text-teal-500 hover:text-teal-600 underline'
+                  >
                     {t.text}
                   </em>
                 );

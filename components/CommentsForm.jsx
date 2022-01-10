@@ -88,7 +88,7 @@ const CommentsForm = ({ slug }) => {
       <div className='mt-8'>
         <button
           type='button'
-          className='transition duration-500 ease-in-out hover:bg-indigo-900 inline-block bg-pink-600 text-lg rounded-full text-white px-6 py-2'
+          className='transition duration-500 ease-in-out hover:bg-teal-600 bg-teal-500 inline-block text-lg rounded-full text-white px-6 py-2'
           onClick={handleSubmit}
         >
           Submit
