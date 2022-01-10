@@ -13,7 +13,7 @@ import {
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
-  const categories = post.categories.map(({ slug }) => slug);
+  const categories = post?.categories.map(({ slug }) => slug);
 
   if (router.isFallback) return <Loader />;
   return (
@@ -34,7 +34,7 @@ const PostDetails = ({ post }) => {
                 Categories
               </h3>
               <div className='flex flex-wrap gap-2 mt-4'>
-                {post.categories.map(({ name, slug }) => (
+                {post?.categories.map(({ name, slug }) => (
                   <Link
                     key={slug}
                     className='text-md w-auto'

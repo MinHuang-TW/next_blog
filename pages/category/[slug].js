@@ -5,7 +5,7 @@ import { PostCard, Loader } from '../../components';
 
 const CategoryPost = ({ posts, slug }) => {
   const router = useRouter();
-  const name = posts[0].node.categories.find(
+  const name = posts?.[0].node.categories.find(
     (category) => category.slug === slug
   ).name;
 
