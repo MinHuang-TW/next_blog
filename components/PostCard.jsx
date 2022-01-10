@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
   const { text } = useReadingTime(post?.content?.text);
   return (
     <Link href={`/post/${post.slug}`}>
-      <article className='bg-white shadow-lg hover:shadow-2xl rounded-lg p-0 mb-8 cursor-pointer transition duration-500'>
+      <article className='bg-white shadow-lg hover:shadow-2xl rounded-lg p-0 cursor-pointer transition duration-500'>
         <div className='relative overflow-hidden pb-80'>
           <Image
             className='rounded-t-lg'

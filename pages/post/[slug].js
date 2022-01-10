@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { getPosts, getPostDetails } from '../../services';
 import {
   PostDetail,
-  Categories,
   PostWidget,
   Author,
   Comments,
@@ -13,6 +13,8 @@ import {
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
+  const categories = post.categories.map(({ slug }) => slug);
+
   if (router.isFallback) return <Loader />;
   return (
     <div className='container mx-auto px-10 mb-8'>
@@ -25,11 +27,26 @@ const PostDetails = ({ post }) => {
         </div>
         <div className='col-span-1 lg:col-span-4'>
           <div className='relative lg:sticky top-8'>
-            <PostWidget
-              slug={post.slug}
-              categories={post?.categories?.map(({ slug }) => slug)}
-            />
-            <Categories />
+            <PostWidget slug={post.slug} categories={categories} />
+            {/* <Categories /> */}
+            <div className='bg-white shadow-lg rounded-lg p-8'>
+              <h3 className='text-xl font-semibold border-b pb-4'>
+                Categories
+              </h3>
+              <div className='flex flex-wrap gap-2 mt-4'>
+                {post.categories.map(({ name, slug }) => (
+                  <Link
+                    key={slug}
+                    className='text-md w-auto'
+                    href={`/category/${slug}`}
+                  >
+                    <small className='px-3 py-1 rounded-full border border-teal-500 text-teal-500 hover:text-white hover:bg-teal-500 transition duration-500 cursor-pointer'>
+                      {name}
+                    </small>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

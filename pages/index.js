@@ -10,7 +10,7 @@ export default function Home({ posts }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='grid gap-8 grid-cols-1 lg:grid-cols-12'>
-        <section className='lg:col-span-8 col-span-1'>
+        <section className='lg:col-span-8 col-span-1 grid gap-8'>
           {posts.map(({ node: post }) => (
             <PostCard key={post.title} post={post} />
           ))}
@@ -18,13 +18,10 @@ export default function Home({ posts }) {
         <section className='lg:col-span-4 col-span-1'>
           <div className='lg:sticky relative top-8'>
             <PostWidget />
-            <Categories />
+            <Categories posts={posts} />
           </div>
         </section>
       </main>
-      <footer className='p-[3.75rem] text-center'>
-        <small className='text-white'>{`Chunwei Hse © ${new Date().getFullYear()}`}</small>
-      </footer>
     </div>
   );
 }
