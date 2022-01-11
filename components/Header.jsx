@@ -9,10 +9,17 @@ const Header = () => (
         </span>
       </Link>
     </div>
-    <div className='hidden md:float-left md:contents'>
-      <span className='md:float-right text-white uppercase ml-4 leading-[2.75rem]'>
-        About me
-      </span>
+    <div className='hidden md:float-left md:contents gap-4'>
+      {[
+        { label: 'ABOUT ME', path: '/about' },
+        { label: 'BLOG', path: '/' },
+      ].map(({ label, path }) => (
+        <Link key={label} href={path}>
+          <span className='md:float-right text-white hover:text-white/60 transition duration-500 uppercase ml-8 leading-[2.75rem] cursor-pointer'>
+            {label}
+          </span>
+        </Link>
+      ))}
     </div>
   </header>
 );

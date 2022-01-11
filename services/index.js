@@ -194,3 +194,19 @@ export const getComments = async (slug) => {
   const result = await request(graphqlAPI, query, { slug });
   return result.comments;
 };
+
+export const getAboutDetails = async () => {
+  const query = gql`
+    query MyQuery {
+      author(where: { id: ${JSON.stringify(process.env.NEXT_PUBLIC_ID)} }) {
+        name
+        photo {
+          url
+        }
+        bio
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+  return result.author;
+};
