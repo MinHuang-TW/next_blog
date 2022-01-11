@@ -4,7 +4,7 @@ import { Categories, PostCard, PostWidget } from '../components';
 
 export default function Home({ posts }) {
   return (
-    <div className='container mx-auto px-10'>
+    <>
       <Head>
         <title>Quantum Fern</title>
         <link rel='icon' href='/favicon.ico' />
@@ -22,7 +22,7 @@ export default function Home({ posts }) {
           </div>
         </section>
       </main>
-    </div>
+    </>
   );
 }
 

@@ -11,7 +11,7 @@ const CategoryPost = ({ posts, slug }) => {
 
   if (router.isFallback) return <Loader />;
   return (
-    <div className='container mx-auto px-10 mb-8'>
+    <div>
       <h1 className='text-white text-2xl mb-6'>{`${name} ( ${posts.length} )`}</h1>
       <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
         {/* <div className='col-span-1 lg:col-span-8'> */}

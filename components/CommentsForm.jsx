@@ -1,41 +1,78 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { submitComment } from '../services';
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
-  const [showSuccessMsg, setShowSuccessMsg] = useState(false);
-  const commentEl = useRef();
-  const nameEl = useRef();
-  const emailEl = useRef();
-  const storeDataEl = useRef();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    comment: '',
+    storeData: false,
+  });
+
+  const handleChange = ({ currentTarget: input }) => {
+    const data = { ...values };
+    data[input.name] = input.type === 'checkbox' ? input.checked : input.value;
+    setValues(data);
+  };
+
+  const renderInput = (name, type = 'text') => {
+    const props = {
+      name,
+      value: values[name],
+      placeholder: name.charAt(0).toUpperCase() + name.slice(1),
+      onChange: handleChange,
+      className: `outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300 ${
+        type === 'textarea' ? 'p-4' : 'px-4 py-2'
+      }`,
+    };
+    if (type === 'textarea') return <textarea {...props} />;
+    return <input type={name === 'email' ? name : type} {...props} />;
+  };
 
   const handleSubmit = () => {
     setError(false);
-    const { value: comment } = commentEl.current;
-    const { value: name } = nameEl.current;
-    const { value: email } = emailEl.current;
-    const { checked: storeData } = storeDataEl.current;
-    if (!comment || !name || !email) return setError(true);
+
+    const { name, email, comment, storeData } = values;
+    if (!name || !email || !comment) return setError(true);
 
     const commentObj = { name, email, comment, slug };
     if (storeData) {
-      window.localStorage.setItem('name', name);
-      window.localStorage.setItem('email', email);
+      localStorage.setItem('name', name);
+      localStorage.setItem('email', email);
     } else {
-      window.localStorage.removeItem('name', name);
-      window.localStorage.removeItem('email', email);
+      localStorage.removeItem('name');
+      localStorage.removeItem('email');
     }
 
-    submitComment(commentObj).then((result) => {
-      setShowSuccessMsg(true);
-      setTimeout(() => setShowSuccessMsg(false), 3000);
+    submitComment(commentObj).then((res) => {
+      if (!res.createComment) return;
+
+      if (!storeData) {
+        values.name = '';
+        values.email = '';
+      }
+      values.comment = '';
+      setValues((prevState) => ({ ...prevState, ...values }));
+
+      setShowSuccessMessage(true);
+      setTimeout(() => setShowSuccessMessage(false), 3000);
     });
   };
 
   useEffect(() => {
-    nameEl.current.value = window.localStorage.getItem('name');
-    emailEl.current.value = window.localStorage.getItem('email');
+    setLocalStorage(window.localStorage);
+    const initalValues = {
+      name: window.localStorage.getItem('name') || '',
+      email: window.localStorage.getItem('email') || '',
+      storeData:
+        window.localStorage.getItem('name') ||
+        window.localStorage.getItem('email') ||
+        false,
+    };
+    setValues(initalValues);
   }, []);
 
   return (
@@ -44,41 +81,26 @@ const CommentsForm = ({ slug }) => {
         Leave a reply
       </h3>
       <div className='grid grid-cols-1 gap-4 mb-4'>
-        <textarea
-          ref={commentEl}
-          className='p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300'
-          name='comment'
-          placeholder='Comment'
-        />
+        {renderInput('comment', 'textarea')}
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4'>
-        <input
-          type='text'
-          ref={nameEl}
-          name='name'
-          placeholder='Name'
-          className='px-4 py-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300'
-        />
-        <input
-          type='email'
-          ref={emailEl}
-          name='email'
-          placeholder='Email'
-          className='px-4 py-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-teal-400 bg-gray-100 text-gray-700 transition duration-300'
-        />
+      <div className='grid grid-cols-1 gap-4 mb-4 lg:grid-cols-2'>
+        {renderInput('name')}
+        {renderInput('email')}
       </div>
       <div className='grid grid-cols-1 gap-4 mb-4'>
         <div className='container'>
           <input
+            className='accent-teal-600'
             type='checkbox'
-            ref={storeDataEl}
             id='storeData'
             name='storeData'
+            onChange={handleChange}
+            checked={values['storeData']}
             value={true}
           />
           <label
             htmlFor='storeData'
-            className='text-gray-500 cursor-pointer ml-2'
+            className='text-gray-500 select-none cursor-pointer ml-2'
           >
             Remember my name and email
           </label>
@@ -93,8 +115,8 @@ const CommentsForm = ({ slug }) => {
         >
           Submit
         </button>
-        {showSuccessMsg && (
-          <span className='text-xl float-right font-semibold mt-3 text-green-500'>
+        {showSuccessMessage && (
+          <span className='text-lg float-right font-semibold text-teal-500 m-2'>
             Comment submitted for review
           </span>
         )}
