@@ -76,14 +76,14 @@ const CommentsForm = ({ slug }) => {
   }, []);
 
   return (
-    <div className='bg-white shadow-lg rounded-lg p-8 pb-12 mb-8'>
+    <div className='bg-white shadow-lg rounded-lg p-8'>
       <h3 className='text-xl mb-8 font-semibold border-b pb-4'>
         Leave a reply
       </h3>
       <div className='grid grid-cols-1 gap-4 mb-4'>
         {renderInput('comment', 'textarea')}
       </div>
-      <div className='grid grid-cols-1 gap-4 mb-4 lg:grid-cols-2'>
+      <div className='grid grid-cols-1 gap-4 mb-8 lg:grid-cols-2'>
         {renderInput('name')}
         {renderInput('email')}
       </div>

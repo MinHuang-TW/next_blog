@@ -16,7 +16,7 @@ export default function Home({ posts }) {
           ))}
         </section>
         <section className='lg:col-span-4 col-span-1'>
-          <div className='lg:sticky relative top-8'>
+          <div className='lg:sticky lg:top-8 top-0 relative'>
             <PostWidget />
             <Categories posts={posts} />
           </div>
