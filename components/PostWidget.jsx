@@ -8,13 +8,17 @@ const PostWidget = ({ categories, slug }) => {
   const [relatedPosts, setRelatedPosts] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
     if (slug) {
-      getSimilarPosts(categories, slug).then((result) =>
-        setRelatedPosts(result)
-      );
+      getSimilarPosts(categories, slug).then((result) => {
+        if (isMounted) setRelatedPosts(result);
+      });
     } else {
-      getRecentPosts().then((result) => setRelatedPosts(result));
+      getRecentPosts().then((result) => {
+        if (isMounted) setRelatedPosts(result);
+      });
     }
+    return () => (isMounted = false);
   }, [slug]);
 
   return (
