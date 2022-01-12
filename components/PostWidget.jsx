@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import moment from 'moment';
 
 import { getRecentPosts, getSimilarPosts } from '../services';
@@ -29,10 +30,15 @@ const PostWidget = ({ categories, slug }) => {
       {relatedPosts.length ? (
         relatedPosts.map((post) => (
           <div key={post.title} className='flex items-center w-full'>
-            <div
-              className='flex-none w-14 h-14 rounded-full bg-center bg-cover'
-              style={{ backgroundImage: `url(${post.featuredImage.url})` }}
-            />
+            <div className='flex-none relative overflow-hidden w-14 h-14 rounded-full'>
+              <Image
+                src={post.featuredImage.url}
+                alt={post.title}
+                layout='fill'
+                objectFit='cover'
+                objectPosition='center'
+              />
+            </div>
             <div className='flex-grow ml-4'>
               <small className='text-gray-500 block'>
                 {moment(post.createdAt).format('MMM DD, YYYY')}
