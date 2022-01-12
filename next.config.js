@@ -2,7 +2,7 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self' https://api-eu-central-1.graphcms.com/; font-src: https://fonts.googleapis.com/, img-src https://media.graphcms.com/; child-src 'none';",
+      "default-src 'self' https://api-eu-central-1.graphcms.com/ https://media.graphcms.com/ https://vitals.vercel-insights.com/; font-src: https://fonts.googleapis.com/",
   },
 ];
 
