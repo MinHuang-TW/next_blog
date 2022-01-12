@@ -12,7 +12,7 @@ const Categories = ({ posts }) => {
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-8 mb-8 pb-8'>
-      <h3 className='text-xl mb-8 font-semibold border-b pb-4'>Categories</h3>
+      <h2 className='text-xl mb-8 font-semibold border-b pb-4'>Categories</h2>
       {categories.map(({ name, slug }) => {
         let counter = 0;
         posts?.filter(({ node: { categories } }) => {

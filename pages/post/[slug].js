@@ -29,7 +29,7 @@ const PostDetails = ({ post }) => {
           <PostWidget slug={post.slug} categories={categories} />
           {/* <Categories /> */}
           <div className='bg-white shadow-lg rounded-lg p-8'>
-            <h3 className='text-xl font-semibold border-b pb-4'>Categories</h3>
+            <h2 className='text-xl font-semibold border-b pb-4'>Categories</h2>
             <div className='flex flex-wrap gap-2 mt-4'>
               {post?.categories.map(({ name, slug }) => (
                 <Link

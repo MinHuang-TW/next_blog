@@ -50,8 +50,9 @@ const about = ({ author }) => (
     </section>
     <section className='bg-white shadow-lg rounded-lg p-8 lg:col-span-3'>
       <div className='border-l-2 border-l-teal-500 pl-3 text-gray-500 italic mb-8'>
-        Hi ! I am glad that you are reading this very first post of this blog.
-        Let me describe a bit about myself and the objectives of this blog.
+        Hi ! I am glad that you are reading this very first article of this
+        blog. Let me describe a bit about myself and the objectives of this
+        blog.
       </div>
       <div className='mb-8'>
         <h2 className='text-lg font-semibold my-3'>About me</h2>
