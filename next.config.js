@@ -1,7 +1,8 @@
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value: "default-src 'self'; img-src https://*; child-src 'none';",
+    value:
+      "default-src 'self' https://api-eu-central-1.graphcms.com/; font-src: https://fonts.googleapis.com/, img-src https://media.graphcms.com/; child-src 'none';",
   },
 ];
 
