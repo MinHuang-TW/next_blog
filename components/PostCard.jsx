@@ -8,7 +8,7 @@ const PostCard = ({ post }) => {
   return (
     <Link href={`/post/${post.slug}`}>
       <article className='bg-white shadow-lg hover:shadow-2xl rounded-lg overflow-hidden p-0 cursor-pointer transition duration-500'>
-        <div className='relative pb-80'>
+        <div className='relative'>
           <Image
             src={post.featuredImage.url}
             alt={post.title}
